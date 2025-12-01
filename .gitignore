@@ -1,0 +1,23 @@
+# Godot auto-generated translation files
+*.translation
+
+# Backup files
+*.tmp
+*.bak
+*.old
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE files
+.vscode/
+.idea/
+
+# Logs
+logs/
+*.log
+# Godot 4+ specific ignores
+.godot/
+/android/
+
