@@ -48,6 +48,10 @@ func update_debug_label() -> void:
 	ds += "_dragged_vector:%.1f, %.1f" % [_dragged_vector.x, _dragged_vector.y]
 	debug_label.text = ds
 
+func die() -> void:
+	SignalHub.emit_on_animal_died()
+	queue_free()
+
 #endregion
 
 #region drag
@@ -87,6 +91,8 @@ func start_release() -> void:
 	launch_sound.play()
 	freeze = false
 	apply_central_impulse(calculate_impulse())
+	SignalHub.emit_on_attempt_made()
+	
 
 #endregion
 
@@ -120,14 +126,20 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	pass # Replace with function body.
+	die()
 
 
 func _on_sleeping_state_changed() -> void:
-	pass # Replace with function body.
+	if sleeping == true:
+		for body in get_colliding_bodies():
+			if body is Cup:
+				body.die()
+		call_deferred("die")
 
 
 func _on_body_entered(body: Node) -> void:
-	pass # Replace with function body.
+	if body is Cup and kick_sound.playing == false:
+		kick_sound.play()
+		
 	
 #endregion
