@@ -3,10 +3,12 @@ extends Control
 @onready var attempts_label: Label = $MarginContainer/VBoxContainer/AttemptsLabel
 @onready var music: AudioStreamPlayer2D = $Music
 @onready var complete_label: VBoxContainer = $MarginContainer/CompleteLabel
+@onready var level_label: Label = $MarginContainer/VBoxContainer/LevelLabel
 
 var _attempts: int = -1
 
 func _ready() -> void:
+	level_label.text = "Level %s" % ScoreManager.level_selected
 	on_attempt_made()
 	
 func _enter_tree() -> void:
@@ -21,3 +23,4 @@ func on_cup_destryoed(remaining_cups: int) -> void:
 	if remaining_cups == 0:
 		music.play()
 		complete_label.show()
+		ScoreManager.set_score_for_level(ScoreManager.level_selected, _attempts)

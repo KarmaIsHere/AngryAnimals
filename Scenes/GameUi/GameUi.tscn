@@ -57,7 +57,7 @@ vertical_alignment = 1
 
 [node name="LevelLabel2" type="Label" parent="MarginContainer/CompleteLabel"]
 layout_mode = 2
-text = "Press Space"
+text = "Press Escape"
 label_settings = ExtResource("3_tt7lr")
 horizontal_alignment = 1
 vertical_alignment = 1
